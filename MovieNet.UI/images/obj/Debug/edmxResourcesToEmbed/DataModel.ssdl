@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DataModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="DataModelStoreContainer">
+    <EntitySet Name="UserSet" EntityType="DataModel.Store.UserSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="AvisSet" EntityType="DataModel.Store.AvisSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="MovieSet" EntityType="DataModel.Store.MovieSet" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="UserAvis" Association="DataModel.Store.UserAvis">
+      <End Role="User" EntitySet="UserSet" />
+      <End Role="Avis" EntitySet="AvisSet" />
+    </AssociationSet>
+    <AssociationSet Name="MovieAvis" Association="DataModel.Store.MovieAvis">
+      <End Role="Movie" EntitySet="MovieSet" />
+      <End Role="Avis" EntitySet="AvisSet" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="UserSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Login" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AvisSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Comment" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Note" Type="float" Nullable="true" />
+    <Property Name="User_Id" Type="int" Nullable="false" />
+    <Property Name="Movie_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="MovieSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Titre" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Genre" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Resume" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Moyenne" Type="float" Nullable="false" />
+  </EntityType>
+  <Association Name="UserAvis">
+    <End Role="User" Type="DataModel.Store.UserSet" Multiplicity="1" />
+    <End Role="Avis" Type="DataModel.Store.AvisSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Avis">
+        <PropertyRef Name="User_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="MovieAvis">
+    <End Role="Movie" Type="DataModel.Store.MovieSet" Multiplicity="1" />
+    <End Role="Avis" Type="DataModel.Store.AvisSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Movie">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Avis">
+        <PropertyRef Name="Movie_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

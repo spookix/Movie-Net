@@ -1,0 +1,82 @@
+﻿<UserControl x:Class="MovieNet.UI.Views.Movies.MovieAjouter"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MovieNet.UI.Views.Movies"
+             mc:Ignorable="d" 
+             DataContext="{Binding Source={StaticResource VMLocator}, Path=MainVM}"
+             d:DesignHeight="300" d:DesignWidth="500">
+    <Grid>
+        <Grid Background="CornflowerBlue">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40*" />
+            <RowDefinition Height="380*" />
+        </Grid.RowDefinitions>
+        <Label Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Bienvenue dans MovieNet"  Grid.ColumnSpan="2" FontSize="18" FontWeight="Bold" FontStyle="Italic"/>
+        
+        <Border Grid.Row="1" Grid.Column="1" Background="White" Padding="10">
+                <StackPanel>
+
+                    <!--Image & Informations-->
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <!--Image-->
+                        
+                        <!--Informations-->
+                        <Border Margin="10" Grid.Column="1">
+                            <StackPanel >
+                                <TextBlock Text="Titre" FontWeight="Bold" Margin="0 10"/>
+                                <TextBox Padding="2" Text="{Binding CurrentMovieTitre}" />
+
+                                <TextBlock Text="Resume" FontWeight="Bold" Margin="0 10"/>
+                                <TextBox Padding="2"  Text="{Binding CurrentMovieResume}"/>
+
+                                <!--Genre & Moyenne-->
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="2*" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <!--Resume-->
+                                    <StackPanel Grid.Column="0" Margin="0 0 10 0">
+                                        <TextBlock Text="Genre" FontWeight="Bold"/>
+                                        <TextBox Padding="2" Text="{Binding CurrentMoviGenre}"/>
+                                    </StackPanel>
+
+                                    <!--Moyenne-->
+                                    <StackPanel Grid.Column="1">
+                                        <TextBlock Text="Moyenne" FontWeight="Bold"/>
+                                        <TextBox Padding="2" Text="{Binding CurrentMovieMoyenne}"/>
+                                    </StackPanel>
+                                </Grid>
+                                <!--Buttons-->
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 20 10 0">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
+
+                                       
+                                        <!--Bouton-->
+                                        <Button Grid.Column="1" Command="{Binding saveMovieCommand}" Height="27" VerticalAlignment="Bottom">
+                                            Enregistrer
+                                        </Button>
+                                    </Grid>
+                                </StackPanel>
+                            </StackPanel>
+                        </Border>
+                    </Grid>
+                </StackPanel>
+            </Border>
+        </Grid>
+    </Grid>
+</UserControl>

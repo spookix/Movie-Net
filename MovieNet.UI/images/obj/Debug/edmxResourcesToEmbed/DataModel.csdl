@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="DataModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+  <EntityContainer Name="DataModelContainer" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="UserSet" EntityType="DataModel.User" />
+    <EntitySet Name="AvisSet" EntityType="DataModel.Avis" />
+    <EntitySet Name="MovieSet" EntityType="DataModel.Movie" />
+    <AssociationSet Name="UserAvis" Association="DataModel.UserAvis">
+      <End Role="User" EntitySet="UserSet" />
+      <End Role="Avis" EntitySet="AvisSet" />
+    </AssociationSet>
+    <AssociationSet Name="MovieAvis" Association="DataModel.MovieAvis">
+      <End Role="Movie" EntitySet="MovieSet" />
+      <End Role="Avis" EntitySet="AvisSet" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Login" Type="String" Nullable="false" />
+    <Property Name="Password" Type="String" Nullable="false" />
+    <NavigationProperty Name="Avis" Relationship="DataModel.UserAvis" FromRole="User" ToRole="Avis" />
+  </EntityType>
+  <EntityType Name="Avis">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Comment" Type="String" Nullable="false" />
+    <Property Name="Note" Type="Double" Nullable="true" />
+    <NavigationProperty Name="User" Relationship="DataModel.UserAvis" FromRole="Avis" ToRole="User" />
+    <NavigationProperty Name="Movie" Relationship="DataModel.MovieAvis" FromRole="Avis" ToRole="Movie" />
+  </EntityType>
+  <EntityType Name="Movie">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Titre" Type="String" Nullable="false" />
+    <Property Name="Genre" Type="String" Nullable="false" />
+    <Property Name="Resume" Type="String" Nullable="false" />
+    <Property Name="Moyenne" Type="Double" Nullable="false" />
+    <NavigationProperty Name="Avis" Relationship="DataModel.MovieAvis" FromRole="Movie" ToRole="Avis" />
+  </EntityType>
+  <Association Name="UserAvis">
+    <End Type="DataModel.User" Role="User" Multiplicity="1" />
+    <End Type="DataModel.Avis" Role="Avis" Multiplicity="*" />
+  </Association>
+  <Association Name="MovieAvis">
+    <End Type="DataModel.Movie" Role="Movie" Multiplicity="1" />
+    <End Type="DataModel.Avis" Role="Avis" Multiplicity="*" />
+  </Association>
+</Schema>

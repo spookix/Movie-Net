@@ -1,0 +1,42 @@
+﻿<UserControl x:Class="MovieNet.UI.Views.Users.UserConnectedView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:MovieNet.UI.Views.Users"
+      mc:Ignorable="d" 
+      DataContext="{Binding Source={StaticResource VMLocator}, Path=UserVM}"
+      d:DesignHeight="380" d:DesignWidth="380">
+
+    <Grid Background="Azure">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="10*" />
+        </Grid.RowDefinitions>
+        <Label Grid.Row="0" Content="Veuillez remplir les champs" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold"></Label>
+        <DockPanel Grid.Row="1">
+            <Frame x:Name="_mainFrame" />
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="279*" />
+                    <ColumnDefinition Width="101*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="70*" />
+                    <RowDefinition Height="17*" />
+                    <RowDefinition Height="43*" />
+                    <RowDefinition Height="43*" />
+                    <RowDefinition Height="43*" />
+                    <RowDefinition Height="43*" />
+                    <RowDefinition Height="42*" />
+                    <RowDefinition Height="43*" />
+                </Grid.RowDefinitions>
+                <Label Content="{Binding Path=Bienvenue}" Margin="20,41,0,9.4" Width="100" HorizontalAlignment="left" Background="{x:Null}"></Label>
+                <TextBlock Text="{Binding Path=Bye}" Margin="20,10,0,40.4"  HorizontalAlignment="Left" Width="350" Background="{x:Null}" Grid.ColumnSpan="2" />
+
+                <Button Command="{Binding ConnexionViewCommand}" Grid.Row="4" Grid.Column="1" Margin="6.8,10.4,28,7.8" Click="Button_Unlog">Déconnexion</Button>
+            </Grid>
+
+        </DockPanel>
+    </Grid>
+</UserControl>
